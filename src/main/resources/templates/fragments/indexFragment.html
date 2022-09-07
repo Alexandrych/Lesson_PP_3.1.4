@@ -4,30 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-
 <body>
-
-<span th:fragment="indexFragment">
-  <span sec:authorize = "isAuthenticated()">
-
-    <span sec:authorize = "hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
-      <a href="/user">Ваша страница</a> /
-    </span>
-
-    <span sec:authorize = "hasRole('ROLE_ADMIN')">
-      <a href="/admin">Страница админа</a> /
-    </span>
-
-    <a href="/logout">Выйти</a>
-
-  </span>
-    <span sec:authorize = "isAnonymous()">
-      <a href="/login">Войти</a>
-    </span>
-
-    <hr>
-</span>
-
 
 <span th:fragment="indexFragmentName">
   <span sec:authorize = "isAuthenticated()">
@@ -41,5 +18,4 @@
 </th:block>
 
 </body>
-
 </html>

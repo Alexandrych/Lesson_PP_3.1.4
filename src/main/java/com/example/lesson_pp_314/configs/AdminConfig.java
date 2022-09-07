@@ -1,9 +1,9 @@
-package com.example.lesson_pp_313.configs;
+package com.example.lesson_pp_314.configs;
 
-import com.example.lesson_pp_313.dao.RoleDao;
-import com.example.lesson_pp_313.dao.UserDao;
-import com.example.lesson_pp_313.model.User;
-import com.example.lesson_pp_313.model.UserRole;
+import com.example.lesson_pp_314.dao.RoleDao;
+import com.example.lesson_pp_314.dao.UserDao;
+import com.example.lesson_pp_314.model.User;
+import com.example.lesson_pp_314.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,14 +24,17 @@ public class AdminConfig {
 
     @Autowired
     protected void addAdminIfNotExist() {
-        if (userDao.findByUsername("admin") == null) {
+        if (userDao.findByUsername("admin@admin.org") == null) {
             createAdmin();
         }
     }
 
     protected void createAdmin() {
         User user = new User();
-        user.setUsername("admin");
+        user.setUsername("admin@admin.org");
+        user.setFirstName("Stanislav");
+        user.setSecondName("Bogdanov");
+        user.setAge((byte) 29);
         user.setPassword(passwordEncoder.encode("admin"));
         roleDao.save(new UserRole(1L, "ROLE_ADMIN"));
         roleDao.save(new UserRole (2L, "ROLE_USER"));

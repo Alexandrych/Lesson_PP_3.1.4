@@ -1,6 +1,6 @@
-package com.example.lesson_pp_313.configs;
+package com.example.lesson_pp_314.configs;
 
-import com.example.lesson_pp_313.service.UserService;
+import com.example.lesson_pp_314.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -23,17 +23,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                    .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/user").hasAnyRole("USER", "ADMIN")
-                    .antMatchers("/", "/index").permitAll()
-                    .anyRequest().authenticated()
-                .and()
-                    .formLogin().successHandler(successUserHandler)
-                    .permitAll()
-                .and()
-                    .logout()
-                    .permitAll();
+            .authorizeRequests()
+                .antMatchers("/", "/index", "/api/getAuthUser").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/api/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+            .and()
+                .formLogin().successHandler(successUserHandler)
+                .permitAll()
+            .and()
+                .logout()
+                .permitAll()
+                .and().csrf().disable();
     }
 
     @Bean
