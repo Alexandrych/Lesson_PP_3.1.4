@@ -63,8 +63,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByID(long id) {
-        return userDao.findById(id).orElse(null);
+    public User getUserByID(long id) throws UsernameNotFoundException {
+        User user = userDao.findById(id).orElse(null);
+        if (user == null) {
+            throw new UsernameNotFoundException("Пользователь не найден");
+        }
+        user.setPassword("");
+        return user;
     }
 
     @Override
